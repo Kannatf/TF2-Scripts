@@ -1,0 +1,12 @@
+// Heavy
+
+alias +ha "+attack"
+alias -ha "-attack;-reload;wait 5;sl"
+alias sl "+reload;wait 3;+attack2;wait 3;-attack2"
+alias +ha2 "alias sl sl1;sl;bind mouse1 +ha"
+
+alias -ha2 "bind mouse1 +attack;-reload;-attack;alias sl sl2"
+alias sl2 ""
+alias sl1 "+reload;wait 3;+attack2;wait 3;-attack2"
+
+bind mouse2 +ha2
