@@ -1,0 +1,91 @@
+defaultcfg // INCLUDE THIS AT THE START OF ALL OTHER CLASS CFG'S TO RESET THE SCRIPT'S FUNCTIONALITY
+echo MEDIC BINDS LOADED
+
+alias wx1 "cl_crosshair_scale 23; cl_crosshair_file crosshair6; r_drawviewmodel 0"
+alias wx2 "cl_crosshair_scale 23; cl_crosshair_file crosshair7; r_drawviewmodel 0"
+alias wx3 "cl_crosshair_scale 15; cl_crosshair_file crosshair5; r_drawviewmodel 1"
+
+swep1
+
+bind alt "+medradar"
+bind mouse2 "+medic_secondary_call; spec_prev"
+bind 1 swep1
+bind 2 swep2
+bind 3 swep3
+tf_medigun_autoheal 1
+
+//medigun binds:
+
+//the bind to switch to your medigun and use uber, notifying your team
+//regardless of what weapon you're on, holding down this button deploys uber as fast as possible
+
+bind mouse5 "+useuber"
+
+//the bind to fake uber and notify your team
+bind "4" chargefaked
+
+//the bind to signify you are ready with a 100% charge
+bind "5" chargeready
+
+//the bind to signify switching between normal uber and kritz
+bind "9" medigunswap
+
+//CODE BELOW THIS LINE
+
+alias +medic_secondary_call "+medradar; swep2"
+alias -medic_secondary_call "-medradar"
+
+alias +useuber "swep2;+attack2;chargeused"
+alias -useuber "-attack2"
+
+alias "+medradar" "hud_medicautocallersthreshold 300"
+alias "-medradar" "hud_medicautocallersthreshold 75"
+
+alias medigunswap "kritzcurrentmed"
+
+alias ubercurrentmed "usinguber; alias medigunswap kritzcurrentmed"
+alias kritzcurrentmed "usingkritz; alias medigunswap ubercurrentmed"
+
+alias usinguber "say_team >>>*USING NORMAL STOCK MEDIGUN*<<<; uberenabled"
+alias usingkritz "say_team >>>*USING KRITZKRIEG*<<<; kritzenabled"
+
+alias ChargeReady ""
+alias ChargeFaked "voicemenu 1 7;ChargeFakedO"
+alias ChargeUsed ""
+
+alias UberChargeReady "say_team >>>*NORMAL UBER READY, 100% CHARGE*<<<"
+alias UberChargeUsed "say_team >>>*DEPLOYING NORMAL UBER NOW*<<<"
+alias UberChargeFaked "say_team >>>*FAKING NORMAL UBER*<<<"
+
+alias KritzChargeReady "say_team >>>*KRITZ READY, 100% CHARGE*<<<"
+alias KritzChargeUsed "say_team >>>*DEPLOYING KRITZ NOW*<<<"
+alias KritzChargeFaked "say_team >>>*FAKING KRITZ*<<<"
+
+alias uberenabled "alias ChargeReady UberChargeReady; alias ChargeFakedO UberChargeFaked; alias ChargeUsed UberChargeUsed"
+alias kritzenabled "alias ChargeReady KritzChargeReady; alias ChargeFakedO KritzChargeFaked; alias ChargeUsed KritzChargeUsed"
+
+uberenabled
+
+alias aba "cwep1;alias sweps abb;won1"
+alias abb "cwep2;alias sweps aba;won2"
+alias bcb "cwep2;alias sweps bcc;won2"
+alias bcc "cwep3;alias sweps bcb;won3"
+alias cac "cwep3;alias sweps caa;won3"
+alias caa "cwep1;alias sweps cac;won1"
+alias cwep1 "slot1;wx1"
+alias cwep2 "slot2;wx2"
+alias cwep3 "slot3;wx3"
+alias swep1 "cwep1;awbind"
+alias swep2 "cwep2;bwbind"
+alias swep3 "cwep3;cwbind"
+alias won1 "alias whdn cac; alias whup bcb; alias awbind none; alias bwbind abb; alias cwbind cac"
+alias won2 "alias whdn aba; alias whup bcc; alias awbind aba; alias bwbind none; alias cwbind bcc"
+alias won3 "alias whdn abb; alias whup caa; alias awbind caa; alias bwbind bcb; alias cwbind none"
+alias none ""
+aba
+
+alias wx1 "r_drawviewmodel 1; cl_crosshair_scale 32"
+alias wx2 "r_drawviewmodel 0; cl_crosshair_scale 32"
+alias wx3 "r_drawviewmodel 1; cl_crosshair_scale 0"
+
+alias defaultcfg "bind 1 slot1; bind 2 slot2; bind 3 slot3; bind 4 slot4; bind 5 slot5; unbind 9; unbind alt; bind mouse2 +attack2; bind mouse1 +attack; -attack"
