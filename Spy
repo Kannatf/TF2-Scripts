@@ -1,0 +1,127 @@
+///SPY///
+
+//Script Features
+
+//Auto Crouch Jump
+//Null Movement
+//Auto Reload
+//Toggle Duck
+//Q calls Medic
+//Crosshair Flash on shoot
+//Holding mouse3 Saps
+//Mouse4 Zooms
+//Mouse5 is Voice Chat
+//Mouse Wheel Up is Knife
+//Mouse Wheel Down is Revolver (no revolver viewmodels)
+//1, 2 and 3 Buttons change desguises Weapon
+//Shift Calls out Spy
+
+alias +crouchjump "+jump; +duck"
+alias -crouchjump "-duck; -jump"
+
+alias duck "duckON"
+alias duckON "+duck; alias duck duckOFF"
+alias duckOFF "-duck; alias duck duckON"
+
+bind "ctrl" "duck"
+bind "space" "+crouchjump"
+bind "q" "voicemenu 0 0"
+
+bind mouse1 vmon
+
+fov_desired 95
+
+alias vmsap "bind mouse1 +sap"
+alias +sap "+attack;r_drawviewmodel 1;crosshair 0"
+alias -sap "-attack;crosshair 0"
+
+alias +sapper "slot2;dotxhairtype;dotxhaircolor;sensitivity 3;r_drawviewmodel 1;vmon;fov_desired 90;viewmodel_fov 99;+attack;say_team Sapping;crosshair 0"
+alias -sapper "dotxhairtype;dotxhaircolor;-attack; wait 10; lastinv;crosshair 0"
+bind "mouse3" "+sapper;vmsap"
+
+alias vmon "bind mouse1 +viewmodelon"
+alias +viewmodelon "+attack;r_drawviewmodel 1;spec_next;crosshair 0"
+alias -viewmodelon "-attack;r_drawviewmodel 1;crosshair 0"
+
+alias +equip3 ";vmon;slot3;sensitivity 5;cl_autoreload 1;m_yaw .0220000000;viewmodel_fov 95;r_drawviewmodel 1;alias wpn slot3;crosshair 0"
+alias -equip3 "fov_desired 90;r_drawviewmodel 1;crosshair 0"
+bind "mwheelup" "+equip3;crosshair 0"
+
+alias vmoff "bind mouse1 +viewmodeloff"
+alias +viewmodeloff "+attack;dotxhairtype;dotxhaircolor;r_drawviewmodel 0;spec_next"
+alias -viewmodeloff "-attack;dotxhairtype;dotxhaircolor;r_drawviewmodel 0"
+
+alias +equip1 ";slot1;dotxhairtype;dotxhaircolor;r_drawviewmodel 1;sensitivity 1;viewmodel_fov 99;crosshair 1"
+alias -equip1 "dotxhaircolor;dotxhairtype;sensitivity 5;r_drawviewmodel 0;vmoff;crosshair 1"
+bind "mwheeldown" "+equip1;crosshair 1"
+
+bind "mouse2" "+spycustomattack2"
+alias +spycustomattack2 ";+attack2;r_drawviewmodel 1;spec_prev"
+alias -spycustomattack2 "-attack2;r_drawviewmodel 1"
+
+alias dotxhaircolor "dotxhaircolorb"
+alias dotxhaircolorb "cl_crosshair_blue 0; cl_crosshair_green 0; cl_crosshair_red 255;alias dotxhaircolor dotxhaircolorr"
+alias dotxhaircolorr "cl_crosshair_blue 0; cl_crosshair_green 200; cl_crosshair_red 0;alias dotxhaircolor dotxhaircolorb"
+
+alias dotxhairtype "dotxhairtypeb"
+alias dotxhairtypeb "cl_crosshair_file crosshair5;cl_crosshair_scale 20;alias dotxhairtype dotxhairtyper"
+alias dotxhairtyper "cl_crosshair_file crosshair5;cl_crosshair_scale 20;alias dotxhairtype dotxhairtypeb"
+
+bind w +mfwd
+bind s +mback
+bind a +mleft
+bind d +mright
+
+alias +mfwd "-back;+forward;alias checkfwd +forward"
+alias +mback "-forward;+back;alias checkback +back"
+alias +mleft "-moveright;+moveleft;alias checkleft +moveleft"
+alias +mright "-moveleft;+moveright;alias checkright +moveright"
+alias -mfwd "-forward;checkback;alias checkfwd none"
+alias -mback "-back;checkfwd;alias checkback none"
+alias -mleft "-moveleft;checkright;alias checkleft none"
+alias -mright "-moveright;checkleft;alias checkright none"
+alias checkfwd none
+alias checkback none
+alias checkleft none
+alias checkright none
+alias none ""
+
+bind "1" +slot1_disguiser
+alias +slot1_disguiser "slot1;lastdisguise"
+alias -slot1_disguiser "lastinv"
+
+bind "2" +slot2_disguiser
+alias +slot2_disguiser "slot2;lastdisguise"
+alias -slot2_disguiser "lastinv"
+
+bind "3" +slot3_disguiser
+alias +slot3_disguiser "slot3;lastdisguise"
+alias -slot3_disguiser "lastinv"
+
+alias dropdisg "disguise 8 -2"
+bind r dropdisg
+
+alias "callspy" "repeatspy"
+alias "repeatspy" "voicemenu 1 1;wait 60; callspy"
+alias "endspy" "alias callspy nocmd"
+
+alias "+spycall" "alias callspy repeatspy; callspy"
+alias "-spycall" "endspy"
+
+bind "shift" "+spycall"
+
++reload
+
+bind "mouse4" "+ambyzoom"
+alias "ambyzoomoff" "fov_desired 95; viewmodel_fov 95; viewmodel_fov_demo 70"
+alias "+ambyzoom" "fov_desired 55; viewmodel_fov 50; viewmodel_fov_demo 54"
+alias "-ambyzoom" "fov_desired 95; viewmodel_fov 95; viewmodel_fov_demo 70"
+
+bind e "disguise1"
+
+alias disguise_random   "disguise1"
+alias disguise1         "disguise 2 -1; alias disguise_random disguise2" // Disguise as Sniper
+alias disguise2         "disguise 4 -1; alias disguise_random disguise3" // Disguise as Demoman
+alias disguise3         "disguise 7 -1; alias disguise_random disguise4" // Disguise as Pyro
+alias disguise4         "disguise 9 -1; alias disguise_random disguise1" // Disguise as Engineer
+
