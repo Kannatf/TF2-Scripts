@@ -1,0 +1,7 @@
+//Sniper Script
+
+alias +sniper_script_instructions "echo Press the F key to fire.; echo Do not swap weapons after pressing F.; echo This script is also supposed to be used when zoomed in, if not zooming it the script will seem slow."
+
+alias +sniper_script "+attack;wait 75;wait 45; slot2;wait 30; slot1; -attack"
+
+bind f +sniper_script
